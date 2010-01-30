@@ -1,18 +1,14 @@
 {% extends "base.html" %}
-
-{% block css %}
-<link rel="stylesheet" type="text/css" href="/static/css/book.css" /> 
-{% endblock %}
-
+ 
 {% block application-header %}New joke{% endblock %}
 {% block title %}New joke{% endblock %}
-
-
+ 
+ 
 {% block application %}
-
-
-<form  action="/book/new/" method="POST">
-
+ 
+ 
+<form action="/book/new/" method="POST">
+ 
   <fieldset>
     <p>
       <label class="field_name" for="content">Your joke:</label>
@@ -21,23 +17,23 @@
       <span class="field_value">{{ form.content }}</span>
     </p>
     
-  </fieldset>  
-
+  </fieldset>
+ 
   <fieldset>
     <p>
       <label class="field_name" for="author">Your nick:</label>
       <span class="field_value">{{ form.author }}</span>
     </p>
-  </fieldset>  
-
+  </fieldset>
+ 
   <fieldset>
     <div class="field_submit">
       <input type="submit" name="submit_joke" value="Submit joke!" />
     </div>
   </fieldset>
-
-
-
+ 
+ 
+ 
 </form>
-
+ 
 {% endblock %}

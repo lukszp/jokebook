@@ -1,46 +1,58 @@
 {% extends "base.html" %}
-
-{% block css %}
-<link rel="stylesheet" type="text/css" href="/static/css/book.css" />
-{% endblock %}
-
+ 
 {% block application-header %}Joke book{% endblock %}
 {% block title %}Joke book{% endblock %}
-
-
+ 
+ 
 {% block application %}
-
+ 
 <div>
   <span>
     {% if jokes.has_previous %}
     <a href="?page={{ jokes.previous_page_number }}">previous</a>
     {% endif %}
-
+ 
     <span>
         Page {{ jokes.number }} of {{ jokes.paginator.num_pages }}
     </span>
-
+ 
     {% if jokes.has_next %}
         <a href="?page={{ jokes.next_page_number }}">next</a>
     {% endif %}
   </span>
 </div>
-
+ 
 {% for joke in jokes.object_list %}
 <div>
     <div class="joke">{{ joke.content|linebreaks }}</div>
-    <div class="summary"> 
-      Created: {{ joke.created.date }} {{ joke.created|time:"H:i" }} 
-      Rank: {{ joke.rank }} 
+    <div class="summary">
+      Created: {{ joke.created.date }} {{ joke.created|time:"H:i" }}
+      Rank: {{ joke.rank }}
       Votes: {{ joke.votes }}
       Author: {{ joke.author }}
       <a href="/book/vote/plus/{{ joke.id }}">(+)</a>
       <a href="/book/vote/minus/{{ joke.id }}">(-)</a>
+      <a href="/book/details/{{joke.id}}">details</a>
     </div>
-
+ 
 </div>
+ 
 {% empty %}
     <div>No jokes yet available.</div>
 {% endfor %}
-
+ 
+{% endblock %}
+ 
+{% block right_side_menu %}
+ 
+<h3>Here is a list of authors, that posted jokes:</h3>
+ 
+{% for name, count in authors.items %}
+<div>{{ name }} posted {{ count }}</div>
+{% endfor %}
+ 
+{% for author in authors %}
+<div> {{ author.author }} </div>
+{% endfor %}
+ 
 {% endblock %}
